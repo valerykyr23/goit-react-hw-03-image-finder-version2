@@ -1,37 +1,46 @@
+import React, { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 // import { Modal } from './Modal/Modal';
 import { Button } from './Button/Button';
-import { InfinitySpin } from 'react-loader-spinner';
+import { ToastContainer } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
+export class App extends Component {
+  state = {
+    queryName: '',
+  };
 
+  // componentDidMount() {
 
+  //   fetch('https://pixabay.com/api/?q=cat&page=1&key=32855889-b519aab1920f45c88bc238e1c&image_type=photo&orientation=horizontal&per_page=12')
+  //     .then(response => response.json())
+  //     .then(console.log)
+  // };
 
-export const App = () => {
-  return (
-    <div
-      style={{
-        // height: '100vh',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        gridGap: '16px',
-        paddingBottom: '24px',
-      }}
-    >
-      <Searchbar />
-      <ImageGallery />
-      {/* <Modal /> */}
-      <Button/>
-      <InfinitySpin 
-        
-  width='200'
-  color="#1057E6"
-/>
+  handleSearchFormSubmit = searchName => {
+    this.setState({ queryName: searchName });
+  };
 
-    </div>
-  );
-};
+  render() {
+    injectStyle();
+    return (
+      <div
+        style={{
+          fontSize: 40,
+          color: '#010101',
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gridGap: '16px',
+          paddingBottom: '24px',
+        }}
+      >
+        <Searchbar onSearch={this.handleSearchFormSubmit} />
+        <ToastContainer autoClose={1000} />
+        <ImageGallery imageInfo={this.state.queryName} />
+        {/* <Modal /> */}
+        <Button />
+      </div>
+    );
+  }
+}
