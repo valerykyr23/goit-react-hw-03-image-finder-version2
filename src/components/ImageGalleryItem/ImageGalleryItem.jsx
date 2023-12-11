@@ -2,12 +2,12 @@ import css from './ImageGalleryItem.module.css';
 // import React, { Component } from 'react';
 // import { InfinitySpin } from 'react-loader-spinner';
 
-export const ImageGalleryItem = () => {
+export const ImageGalleryItem = ({id, smallImage}) => {
 
     return (
-         <li  className={css.ImageGalleryItem}>
+         <li key={id} className={css.ImageGalleryItem}>
               <img className={css.ImageGalleryItemImage}
-                   src='' width="300" alt='' />
+                   src={smallImage} width="300" alt='response img' />
 
       </li>
     );
